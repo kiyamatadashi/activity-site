@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>記事詳細</title>
+</head>
+<body>
+
+<div id="post"></div>
+
+<script>
+const API_KEY = "YOUR_API_KEY";
+const SERVICE_DOMAIN = "YOUR_SERVICE.microcms.io";
+
+const params = new URLSearchParams(location.search);
+const id = params.get("id");
+
+fetch(`https://${SERVICE_DOMAIN}/api/v1/posts/${id}`, {
+  headers: { "X-MICROCMS-API-KEY": API_KEY }
+})
+.then(res => res.json())
+.then(post => {
+  document.getElementById("post").innerHTML = `
+    <h1>${post.title}</h1>
+    <p>${post.date}</p>
+    <div>${post.content}</div>
+  `;
+});
+</script>
+
+</body>
+</html>

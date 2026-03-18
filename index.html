@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>活動報告</title>
+</head>
+<body>
+
+<h1>活動報告</h1>
+<div id="posts"></div>
+
+<script>
+const API_KEY = "YOUR_API_KEY";
+const SERVICE_DOMAIN = "YOUR_SERVICE.microcms.io";
+
+fetch(`https://${SERVICE_DOMAIN}/api/v1/posts`, {
+  headers: { "X-MICROCMS-API-KEY": API_KEY }
+})
+.then(res => res.json())
+.then(data => {
+  const container = document.getElementById("posts");
+
+  data.contents.forEach(post => {
+    const el = document.createElement("div");
+    el.innerHTML = `
+      <h2><a href="post.html?id=${post.id}">${post.title}</a></h2>
+      <p>${post.date}</p>
+    `;
+    container.appendChild(el);
+  });
+});
+</script>
+
+</body>
+</html>
