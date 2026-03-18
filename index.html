@@ -24,7 +24,7 @@ fetch(`https://${SERVICE_DOMAIN}/api/v1/posts`, {
     const el = document.createElement("div");
     el.innerHTML = `
       <h2><a href="post.html?id=${post.id}">${post.title}</a></h2>
-      <p>${post.date}</p>
+      <p>${post.publishedAt}</p>
     `;
     container.appendChild(el);
   });
